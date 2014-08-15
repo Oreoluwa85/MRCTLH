@@ -1,0 +1,6 @@
+#! /bin/bash
+mkdir $(echo $1|awk -F “.” {‘print $1′}).sql
+for i in $(mdb-tables $1); do
+echo $i
+mdb-export -I -R’;\n’ $1 $i > $(echo $1|awk -F “.” {‘print $1′}).sql/$i.sql
+done
